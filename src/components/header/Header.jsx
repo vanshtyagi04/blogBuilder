@@ -37,7 +37,8 @@ function Header() {
         },
     ]
     return (
-        <nav className='flex'>
+        <Container>
+            <nav className='flex'>
             <div className='mr-4'>
                 <Link to='/'>
                     <Logo />
@@ -64,6 +65,8 @@ function Header() {
                 )}
             </ul>
         </nav>
+        </Container>
+        
     )
 }
 
