@@ -39,13 +39,7 @@ export class AuthService{
 
     async getCurrentUser() {
         try{
-            let requiredAccount =  await this.account.get()
-            if(requiredAccount){
-                return requiredAccount;
-            }
-            else{
-                return requiredAccount;
-            }
+            return await this.account.get()
         }
         catch(error){
             console.log("Error :: Appwrite :: AuthService :: getCurrentUser");

@@ -1,7 +1,7 @@
 import React from "react";
-import {Signup as SignupComponenet} from '../components/Signup'
+import SignupComponenet from '../components/Signup'
 
-function SignupPage() {
+function Signup() {
     return (
         <div className="py-8">
             <SignupComponenet/>
@@ -9,4 +9,4 @@ function SignupPage() {
     )
 }
 
-export default SignupPage
+export default Signup;

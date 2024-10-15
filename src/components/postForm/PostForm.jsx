@@ -18,6 +18,8 @@ export default function PostForm({ post }) {
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
 
+    console.log(userData);
+
     const submit = async (data) => {
         if(post) {
             const imageFile = data.image[0] ? await file.uploadFile(data.image[0]) : null;
@@ -33,12 +35,12 @@ export default function PostForm({ post }) {
             }
         }
         else {
-            const file = await appwriteService.uploadFile(data.image[0]);
+            const imgObj = await file.uploadFile(data.image[0]);
 
-            if (file) {
-                const fileId = file.$id;
+            if (imgObj) {
+                const fileId = imgObj.$id;
                 data.featuredImage = fileId;
-                const dbPost = await appwriteService.createPost({ ...data, userId: userData.$id });
+                const dbPost = await service.createPost({ ...data, userId: userData.$id });
 
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
@@ -97,7 +99,7 @@ export default function PostForm({ post }) {
                 {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={appwriteService.getFilePreview(post.featuredImage)}
+                            src={file.getFilePreview(post.featuredImage)}
                             alt={post.title}
                             className="rounded-lg"
                         />
@@ -109,7 +111,7 @@ export default function PostForm({ post }) {
                     className="mb-4"
                     {...register("status", { required: true })}
                 />
-                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
+                <Button type="submit" bgColor={post ? "bg-green-500" : 'bg-red-700'} className="w-full">
                     {post ? "Update" : "Submit"}
                 </Button>
             </div>

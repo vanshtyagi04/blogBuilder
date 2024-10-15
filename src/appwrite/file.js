@@ -8,7 +8,7 @@ export class File{
         this.client
             .setEndpoint(conf.appwriteUrl)
             .setProject(conf.appwriteProjectId);
-        this.bucket = new Storage(conf.appwriteBucketId);
+        this.bucket = new Storage(this.client);
     }
     async uploadFile(file){
         try{
@@ -21,6 +21,7 @@ export class File{
         catch(error){
             console.log("Error :: Appwrite :: File :: uploadFile");
             console.log(error);
+            return false;
         }
         
     }
@@ -41,7 +42,7 @@ export class File{
     }
 
     async getFilePreview(fileId){
-        return this.getFilePreview(
+        return this.bucket.getFilePreview(
             conf.appwriteBucketId,
             fileId
         )
