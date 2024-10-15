@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import service from "../appwrite/configration";
 import { Container, PostCard } from '../components/index'
+import { useSelector } from "react-redux";
 
 function Home() {
     const [posts, setPosts] = useState([])
-
+    const userData = useSelector((state) => state.auth.userData);
     useEffect(() => {
-        service.getPosts().then((posts) => {
+        service.getPosts(userData).then((posts) => {
             if (posts) {
                 setPosts(posts.documents)
             }
