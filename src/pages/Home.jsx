@@ -1,13 +1,13 @@
-import React , {useEffect , useState} from "react";
+import React, { useEffect, useState } from "react";
 import service from "../appwrite/configration";
-import {Container , PostCard} from '../components/index'
+import { Container, PostCard } from '../components/index'
 
 function Home() {
-    const [posts , setPosts] = useState([])
+    const [posts, setPosts] = useState([])
 
     useEffect(() => {
         service.getPosts().then((posts) => {
-            if(posts){
+            if (posts) {
                 setPosts(posts.documents)
             }
         })
@@ -26,16 +26,16 @@ function Home() {
         </div>
     ) : (
         <div className="w-full py-8 mt-4 text-center">
-                <Container>
-                    <div className="flex flex-wrap">
-                        <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
-                                Login to read posts
-                            </h1>
-                        </div>
+            <Container>
+                <div className="flex flex-wrap">
+                    <div className="p-2 w-full">
+                        <h1 className="text-2xl font-bold hover:text-gray-500">
+                            Login to read posts
+                        </h1>
                     </div>
-                </Container>
-            </div>   
+                </div>
+            </Container>
+        </div>
     )
 }
 
