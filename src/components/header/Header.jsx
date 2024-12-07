@@ -13,7 +13,7 @@ function Header() {
         {
             name: 'Home',
             url: "/",
-            active: true
+            active: authStatus, 
         },
         {
             name: "Login",

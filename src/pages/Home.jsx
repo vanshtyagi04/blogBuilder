@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import service from "../appwrite/configration";
 import { Container, PostCard } from '../components/index'
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
     const [posts, setPosts] = useState([])
+    const navigate = useNavigate()
     const userData = useSelector((state) => state.auth.userData);
+    useEffect(() => {
+        if (!userData) {
+            navigate("/login");
+        }
+    }, [userData, navigate]);
     useEffect(() => {
         service.getPosts(userData).then((posts) => {
             if (posts) {
